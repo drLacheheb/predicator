@@ -1,6 +1,11 @@
+from fastapi import FastAPI
 
-def print_something(something):
-    print(f'Hmmm, {something}')
+from api.v1.endpoints.exam_analysis import exams_router
 
-if __name__ == '__main__':
-    print_something('Under Construction')
+version = "v1"
+app = FastAPI(
+    title="Predicator",
+    version=version,
+)
+
+app.include_router(exams_router, prefix=f"/api/{version}/exams", tags=["exams"])
