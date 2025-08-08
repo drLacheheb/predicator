@@ -2,9 +2,9 @@ from typing import Optional, List, Literal
 
 from pydantic import BaseModel, Field
 
-from common_primitives import Metadata
-from question_hierarchy import Question
-from sections import Group
+from schemas.common_primitives import Metadata
+from schemas.question_hierarchy import Question
+from schemas.sections import Group
 
 
 class Exam(BaseModel):

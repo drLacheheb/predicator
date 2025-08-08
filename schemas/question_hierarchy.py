@@ -2,8 +2,8 @@ from typing import Literal, Optional, List, Union, Dict
 
 from pydantic import BaseModel, Field
 
-from common_primitives import SharedContext
-from answer_primitives import ChoiceOption
+from schemas.common_primitives import SharedContext
+from schemas.answer_primitives import ChoiceOption, MatchPair, BlankSpec
 
 QuestionKind = Literal[
     "multiple_choice",
@@ -21,7 +21,7 @@ class BaseQuestion(BaseModel):
     kind: QuestionKind
     id: Optional[str] = None
     prompt: str
-    stimulus: Optional[SharedContext] = None
+    shared_context: Optional[SharedContext] = None
     difficulty: Optional[Literal["easy", "medium", "hard"]] = None
     learning_objectives: List[str] = Field(default_factory=list)
 
@@ -77,7 +77,7 @@ class ComputationalQuestion(BaseQuestion):
     kind: Literal["computational"] = "computational"
     givens: Dict[str, Union[int, float, str]] = Field(default_factory=dict)
     variables: List[str] = Field(default_factory=list)
-    subparts: List[ComputationalSubpart] = Field(default_factory=list)
+    sub_parts: List[ComputationalSubpart] = Field(default_factory=list)
     final_answer: Optional[str] = None
     units: Optional[str] = None
     rationale: Optional[str] = None
