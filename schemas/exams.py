@@ -7,7 +7,8 @@ from question_hierarchy import Question
 from sections import Group
 
 
-class ExamBase(BaseModel):
+class Exam(BaseModel):
+    exam_type: Literal["objective", "subjective"]
     metadata: Optional[Metadata] = None
     title: Optional[str] = None
     instructions: Optional[str] = None
@@ -15,9 +16,3 @@ class ExamBase(BaseModel):
     groups: List[Group] = Field(default_factory=list)
     questions: List[Question] = Field(default_factory=list)
     answer_key_complete: bool = False
-
-class ObjectiveExam(ExamBase):
-    exam_type: Literal["objective"] = "objective"
-
-class SubjectiveExam(ExamBase):
-    exam_type: Literal["subjective"] = "subjective"
